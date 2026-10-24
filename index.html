@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0F0F0F">
+  <title>NETCOURSE — Learn the Network</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050810'/%3E%3Cpath d='M6 24V8l20 16V8' fill='none' stroke='%2322d3ee' stroke-width='3'/%3E%3Ccircle cx='6' cy='8' r='3' fill='%2322d3ee'/%3E%3Ccircle cx='26' cy='24' r='3' fill='%23fbbf24'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body data-current-view="welcome" data-theme="green">
+  <a class="skip-link" href="#app-main">Skip to learning content</a>
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <main id="app-main">
+    <!-- 01 / Welcome -->
+    <section class="view welcome-view is-active" data-view="welcome" aria-labelledby="welcome-title">
+      <canvas id="network-canvas" aria-hidden="true"></canvas>
+      <div class="welcome-grid" aria-hidden="true"></div>
+      <div class="welcome-topline">
+        <span class="system-label"><i class="status-dot"></i>NETWORK READY</span>
+        <div class="welcome-controls"><label class="theme-control"><span>ACCENT</span><select data-theme-select aria-label="Color accent"><option value="green">Neon Green</option><option value="orange">Pumpkin Orange</option><option value="tokyo">Tokyo Night</option></select></label><label class="language-control"><span>LANGUAGE</span><select id="language-select" aria-label="Interface language"><option value="en">EN — English</option><option value="fr">FR — Français</option></select></label></div>
+      </div>
+      <div class="welcome-content">
+        <div class="welcome-copy">
+          <div class="netcourse-logo" aria-label="NETCOURSE">
+            <svg viewBox="0 0 72 72" fill="none" aria-hidden="true"><path d="M15 54V18l42 36V18" stroke="currentColor" stroke-width="4"/><circle cx="15" cy="18" r="6" fill="currentColor"/><circle cx="57" cy="54" r="6" fill="var(--accent-warning)"/><path d="M15 36h21l21-18" stroke="currentColor" stroke-opacity=".35" stroke-dasharray="3 5"/></svg>
+            <span>NETCOURSE<small>CYBERPUNK LEARNING LAB</small></span>
+          </div>
+          <p class="welcome-kicker" data-i18n="welcomeKicker">KNOWLEDGE TRAVELS HERE</p>
+          <h1 id="welcome-title" data-i18n="welcomeTitle">Learn the network.<br><span>Become the signal.</span></h1>
+          <p class="welcome-description" data-i18n="welcomeDescription">A hands-on learning experience where every concept connects, every packet has a path, and every mission makes the network clearer.</p>
+          <div class="welcome-actions">
+            <button class="button button-primary" type="button" data-action="start-learning"><span data-i18n="start">Start learning</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m9 5 7 7-7 7V5Z"/></svg></button>
+            <button class="button button-secondary" type="button" data-action="explore-courses" data-i18n="explore">Explore courses</button>
+          </div>
+        </div>
+        <div class="boot-terminal" aria-label="System startup terminal">
+          <div class="terminal-titlebar"><span>BOOT_SEQUENCE.LOG</span><span>TTY_01</span></div>
+          <div class="boot-lines" id="boot-lines" aria-live="polite"></div>
+          <div class="boot-prompt"><span>netcourse@gateway:~$</span><i></i></div>
+        </div>
+      </div>
+      <div class="welcome-footer"><span>PROTOCOL: LEARN / PLAY / BUILD</span><span>NODE 001 — GATEWAY</span></div>
+    </section>
+
+    <div class="application-shell" id="application-shell" hidden>
+      <header class="app-header">
+        <button class="app-brand" type="button" data-action="go-hub" aria-label="NETCOURSE Learning Hub">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 30V10l24 20V10" stroke="currentColor" stroke-width="2.5"/><circle cx="8" cy="10" r="3" fill="currentColor"/><circle cx="32" cy="30" r="3" fill="var(--accent-warning)"/></svg>
+          <span>NETCOURSE<small>LEARNING SYSTEM</small></span>
+        </button>
+        <div class="header-context"><span id="header-section">LEARNING HUB</span><i>/</i><span>LEARNER_01</span></div>
+        <div class="header-actions"><span class="system-label"><i class="status-dot"></i>LINK STABLE</span><label class="theme-control header-theme"><span class="sr-only">Color accent</span><select data-theme-select aria-label="Color accent"><option value="green">Neon Green</option><option value="orange">Pumpkin Orange</option><option value="tokyo">Tokyo Night</option></select></label><button class="text-button" type="button" data-action="go-welcome">Exit</button></div>
+      </header>
+      <div class="global-progress" id="global-progress" hidden><span id="global-progress-bar"></span></div>
+
+      <!-- 02 / Learning Hub -->
+      <section class="view app-view" data-view="hub" aria-labelledby="hub-title" hidden>
+        <div class="view-container hub-container">
+          <div class="hub-intro view-enter-item">
+            <p class="eyebrow">YOUR NEXT CONNECTION</p>
+            <h1 id="hub-title" tabindex="-1" data-i18n="hubTitle">What should you<br><span>learn next?</span></h1>
+            <p>Pick up exactly where you left off. No noise, just your next best step.</p>
+          </div>
+          <button class="next-course view-enter-item" type="button" data-action="open-course" aria-label="Continue Networking Basics">
+            <span class="next-course-copy">
+              <span class="course-label"><i class="status-dot"></i>CONTINUE LEARNING</span>
+              <strong class="course-title" id="hub-course-title">Networking Basics</strong>
+              <span class="course-description">Understand how devices connect, communicate, and share information.</span>
+              <span class="last-lesson"><span>LAST LESSON</span>1.2 — Wrapping the Message</span>
+            </span>
+            <span class="next-course-action"><span class="course-progress-ring" style="--value:42"><strong>42%</strong></span><span class="continue-label">Continue learning<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span>
+            <span class="course-card-track"><span style="width:42%"></span></span>
+          </button>
+          <section class="course-library view-enter-item" aria-labelledby="library-title">
+            <div class="section-heading"><h2 id="library-title">Your course library</h2><span>03 COURSES</span></div>
+            <div class="library-row"><div class="library-index">01</div><div><strong>Networking Basics</strong><span>3 chapters · In progress</span></div><span class="library-status active">CURRENT</span></div>
+            <div class="library-row"><div class="library-index">02</div><div><strong>Cyber Defense</strong><span>4 chapters · Available next</span></div><span class="library-status">QUEUED</span></div>
+            <div class="library-row"><div class="library-index">03</div><div><strong>Cloud Infrastructure</strong><span>5 chapters · Available next</span></div><span class="library-status">QUEUED</span></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- 03 / Course Map -->
+      <section class="view app-view" data-view="map" aria-labelledby="map-title" hidden>
+        <div class="view-container map-container">
+          <div class="page-topline"><button class="back-button" type="button" data-action="go-hub"><span>←</span>Learning hub</button><span>COURSE MAP // 03 CHAPTERS</span></div>
+          <div class="map-heading view-enter-item"><p class="eyebrow">YOUR LEARNING JOURNEY</p><h1 id="map-title" tabindex="-1">Networking Basics</h1><p>Follow the signal. Each chapter builds on the last.</p></div>
+          <div class="chapter-path">
+            <div class="path-line" aria-hidden="true"><span></span></div>
+            <button class="chapter-stop view-enter-item" type="button" data-action="open-chapter" data-chapter="1">
+              <span class="chapter-marker"><span>01</span></span><span class="chapter-card"><span class="chapter-meta"><span>CHAPTER 01</span><span class="status-badge in-progress" id="chapter-1-status">IN PROGRESS</span></span><strong>Why Networks Exist</strong><span>Discover why devices need a shared language and a path to communicate.</span><span class="chapter-details">4 SECTIONS · 1 LAB<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span>
+            </button>
+            <button class="chapter-stop view-enter-item" type="button" data-action="open-chapter" data-chapter="2">
+              <span class="chapter-marker"><span>02</span></span><span class="chapter-card"><span class="chapter-meta"><span>CHAPTER 02</span><span class="status-badge available" id="chapter-2-status">AVAILABLE</span></span><strong>Wrapping the Message</strong><span>See how data is packaged, addressed, and prepared for its journey.</span><span class="chapter-details">4 SECTIONS · 1 LAB<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span>
+            </button>
+            <button class="chapter-stop view-enter-item" type="button" data-action="open-chapter" data-chapter="3">
+              <span class="chapter-marker"><span>03</span></span><span class="chapter-card"><span class="chapter-meta"><span>CHAPTER 03</span><span class="status-badge available" id="chapter-3-status">AVAILABLE</span></span><strong>Devices &amp; Topologies</strong><span>Meet the hardware and patterns that shape every connected system.</span><span class="chapter-details">4 SECTIONS · 1 LAB<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 / Chapter Overview -->
+      <section class="view app-view" data-view="overview" aria-labelledby="overview-title" hidden>
+        <div class="view-container overview-container">
+          <div class="page-topline"><button class="back-button" type="button" data-action="go-map"><span>←</span>Course map</button><span id="overview-code">MODULE_01 // BRIEFING</span></div>
+          <div class="overview-hero view-enter-item"><p class="eyebrow" id="overview-eyebrow">CHAPTER 01 · MISSION BRIEFING</p><h1 id="overview-title" tabindex="-1">Why Networks Exist</h1><p id="overview-description">Before the cables, protocols, and packets, there was a simple problem: how do we share what we know?</p></div>
+          <div class="overview-grid">
+            <section class="chapter-sections view-enter-item" aria-labelledby="sections-title"><div class="section-heading"><h2 id="sections-title">In this chapter</h2><span>04 SECTIONS</span></div>
+              <div class="section-row"><span>1.1</span><div><strong>A world without networks</strong><p>Start with the problem networks were built to solve.</p></div><span>04 MIN</span></div>
+              <div class="section-row"><span>1.2</span><div><strong>Devices &amp; addresses</strong><p>Give every sender and receiver an identity.</p></div><span>06 MIN</span></div>
+              <div class="section-row"><span>1.3</span><div><strong>The path between</strong><p>Follow a message from one device to another.</p></div><span>08 MIN</span></div>
+              <div class="section-row"><span>1.4</span><div><strong>Your first transmission</strong><p>Put the pieces together in a guided simulation.</p></div><span>05 MIN</span></div>
+            </section>
+            <aside class="overview-side view-enter-item">
+              <section class="outcome-panel"><p class="panel-label">BY THE END, YOU CAN</p><ul><li>Explain why networks exist</li><li>Identify senders, receivers, and paths</li><li>Predict how a message travels</li></ul></section>
+              <section class="lab-preview"><div class="panel-label">FINAL LAB // PREVIEW</div><div class="preview-network" aria-hidden="true"><span class="preview-node">A</span><i></i><span class="preview-node switch">S</span><i class="broken"></i><span class="preview-node">B</span></div><strong>Restore the connection</strong><p>A small network has stopped responding. Inspect, diagnose, and repair it.</p><span class="redacted">SOLUTION ENCRYPTED //////////////////</span></section>
+            </aside>
+          </div>
+          <div class="overview-action view-enter-item"><div><span>ESTIMATED TIME</span><strong>23 MINUTES</strong></div><button class="button button-primary" type="button" data-action="begin-chapter">Begin chapter<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+        </div>
+      </section>
+
+      <!-- 05 / Lesson -->
+      <section class="view app-view lesson-view" data-view="lesson" aria-labelledby="lesson-title" hidden>
+        <div class="lesson-frame">
+          <div class="lesson-topbar"><button class="back-button" type="button" data-action="leave-lesson"><span>←</span>Chapter overview</button><div class="lesson-progress-copy"><span id="lesson-step-label">SECTION 1.2 · LESSON 1 OF 2</span><strong id="lesson-progress-percent">50%</strong></div></div>
+          <div class="lesson-progress-track"><span id="lesson-progress-bar" style="width:50%"></span></div>
+          <div class="lesson-viewport">
+            <div class="lesson-track" id="lesson-track">
+              <article class="lesson-slide" data-lesson-slide="0">
+                <div class="lesson-explanation"><p class="eyebrow">INTERACTIVE LESSON</p><h1 id="lesson-title" tabindex="-1">A message needs<br><span>a path.</span></h1><p>When Device A talks to Device B, the message does not jump through space. It travels across a connection between them.</p><div class="concept-note"><span>KEY IDEA</span><strong>Sender + path + receiver</strong><p>Every network conversation needs all three.</p></div><div class="prediction-box" id="prediction-box"><span class="panel-label">PREDICT FIRST</span><p>What will happen when Device A sends the message?</p><button type="button" data-action="predict" data-prediction="instant">It appears on B instantly</button><button type="button" data-action="predict" data-prediction="travels">It travels across the connection</button><button type="button" data-action="predict" data-prediction="disappears">It disappears into the network</button></div></div>
+                <div class="simulation-panel"><div class="simulation-header"><span>COMMUNICATION_SIM.EXE</span><span id="sim-state">READY</span></div><div class="network-stage" id="network-stage" data-stage="0">
+                  <svg viewBox="0 0 640 360" fill="none" aria-label="Interactive network communication diagram">
+                    <g class="stage-device device-a"><rect x="54" y="116" width="142" height="112" rx="4" fill="var(--p-void)" stroke="var(--accent-primary)"/><rect x="72" y="136" width="106" height="54" fill="var(--accent-primary)" fill-opacity=".08" stroke="var(--accent-primary)" stroke-opacity=".45"/><path d="M105 240h40l8 20H97l8-20Z" fill="var(--p-panel)" stroke="var(--accent-primary)"/><text x="125" y="168" fill="var(--text-primary)" text-anchor="middle">DEVICE A</text><text x="125" y="292" fill="var(--text-muted)" text-anchor="middle">SENDER</text></g>
+                    <g class="stage-device device-b"><rect x="444" y="116" width="142" height="112" rx="4" fill="var(--p-void)" stroke="var(--accent-primary)"/><rect x="462" y="136" width="106" height="54" fill="var(--accent-primary)" fill-opacity=".08" stroke="var(--accent-primary)" stroke-opacity=".45"/><path d="M495 240h40l8 20h-56l8-20Z" fill="var(--p-panel)" stroke="var(--accent-primary)"/><text x="515" y="168" fill="var(--text-primary)" text-anchor="middle">DEVICE B</text><text x="515" y="292" fill="var(--text-muted)" text-anchor="middle">RECEIVER</text></g>
+                    <g class="stage-connection"><path d="M196 174h248" stroke="var(--accent-primary)" stroke-width="3"/><path d="M196 174h248" stroke="var(--accent-primary)" stroke-opacity=".35" stroke-width="12"/><circle cx="196" cy="174" r="5" fill="var(--accent-primary)"/><circle cx="444" cy="174" r="5" fill="var(--accent-primary)"/></g>
+                    <g class="stage-packet"><rect x="-20" y="-14" width="40" height="28" rx="2" fill="var(--accent-warning)"/><path d="M-10-4h20M-10 3h12" stroke="var(--p-void)" stroke-width="2"/><animateMotion id="packet-motion" dur="1.4s" path="M216 174H424" fill="freeze" begin="indefinite"/></g>
+                  </svg>
+                  <div class="sim-caption" id="sim-caption">Press Play or Step to build the network.</div>
+                </div><div class="simulation-controls"><button class="sim-button" type="button" data-action="sim-play" id="sim-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>Play</button><button class="sim-button" type="button" data-action="sim-pause" id="sim-pause" disabled><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM14 5h4v14h-4z"/></svg>Pause</button><button class="sim-button" type="button" data-action="sim-step"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m5 5 10 7-10 7V5Zm12 0h3v14h-3z"/></svg>Step</button><button class="sim-button reset" type="button" data-action="sim-reset">Reset</button></div><div class="sim-feedback" id="sim-feedback" aria-live="polite">Make a prediction, then run the simulation.</div></div>
+              </article>
+
+              <article class="lesson-slide" data-lesson-slide="1" aria-hidden="true">
+                <div class="lesson-explanation"><p class="eyebrow">CONNECT THE CONCEPT</p><h1 tabindex="-1">Three parts.<br><span>One network.</span></h1><p>You have seen a message travel between two devices. Now identify the essential ingredients that made the communication possible.</p><div class="concept-note"><span>REMEMBER</span><strong>A path can be wired or wireless.</strong><p>The medium changes. The sender, path, and receiver remain.</p></div></div>
+                <div class="lesson-check-panel"><div class="simulation-header"><span>QUICK_CHECK.EXE</span><span>01 QUESTION</span></div><div class="lesson-check-content"><span class="panel-label">CHECK YOUR MODEL</span><h2>What does every network conversation need?</h2><div class="lesson-check-options"><button type="button" data-action="lesson-check" data-correct="false">Two devices and a password</button><button type="button" data-action="lesson-check" data-correct="true">A sender, a receiver, and a path</button><button type="button" data-action="lesson-check" data-correct="false">A server and an internet connection</button></div><div class="check-feedback" id="lesson-check-feedback" aria-live="polite">Choose the best answer to complete this lesson.</div></div></div>
+              </article>
+            </div>
+          </div>
+          <div class="lesson-footer"><span id="lesson-footer-hint">Complete the activity to continue.</span><button class="button button-primary" type="button" data-action="lesson-next" id="lesson-next" disabled>Next<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+        </div>
+      </section>
+
+      <!-- 06 / Practical Mission -->
+      <section class="view app-view lab-view" data-view="lab" aria-labelledby="lab-title" hidden>
+        <div class="view-container lab-container">
+          <div class="page-topline"><button class="back-button" type="button" data-action="back-to-lesson"><span>←</span>Lesson</button><span>PRACTICAL MISSION // LAB_01</span></div>
+          <div class="lab-heading"><p class="eyebrow">HANDS-ON ENVIRONMENT</p><h1 id="lab-title" tabindex="-1">Restore the Connection</h1><p>The network is live. Something between the switch and server is not.</p></div>
+          <div class="mission-briefing" id="mission-briefing"><div class="briefing-code">MISSION_01</div><div class="briefing-copy"><span class="panel-label">MISSION BRIEFING</span><h2>Device A cannot reach Server B.</h2><p>Use the network map and command line to locate the fault, repair it, and verify that communication is restored.</p><ul><li>Inspect the network</li><li>Diagnose the failed component</li><li>Repair and test the connection</li></ul><button class="button button-primary" type="button" data-action="start-mission">Start mission<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m9 5 7 7-7 7V5Z"/></svg></button></div><div class="briefing-visual" aria-hidden="true"><span>?</span><i></i><i></i><i></i></div></div>
+          <div class="lab-workspace" id="lab-workspace" hidden>
+            <div class="lab-main-column">
+              <div class="lab-network-panel"><div class="simulation-header"><span>LIVE_TOPOLOGY.MAP</span><span class="fault-label" id="network-health">FAULT DETECTED</span></div><div class="lab-network" id="lab-network">
+                <svg viewBox="0 0 760 390" fill="none" aria-label="Lab network with Device A, Switch 01, and Server B">
+                  <path d="M180 194h180" stroke="var(--accent-primary)" stroke-width="3"/><path d="M180 194h180" stroke="var(--accent-primary)" stroke-opacity=".15" stroke-width="16"/>
+                  <g class="lab-link-broken"><path d="M400 194h75M535 194h75" stroke="var(--accent-critical)" stroke-width="3" stroke-dasharray="8 7"/><path d="m482 181 18 26m-18 0 18-26" stroke="var(--accent-critical)" stroke-width="4"/></g>
+                  <g class="lab-link-fixed"><path d="M400 194h210" stroke="var(--accent-positive)" stroke-width="3"/><path class="fixed-packet" d="M400 194h210" stroke="var(--text-primary)" stroke-width="5" stroke-dasharray="2 30"/></g>
+                  <g><rect x="55" y="125" width="125" height="138" rx="4" fill="var(--p-void)" stroke="var(--accent-primary)"/><rect x="73" y="145" width="89" height="58" fill="var(--accent-primary)" fill-opacity=".08" stroke="var(--accent-primary)" stroke-opacity=".4"/><text x="117" y="179" fill="var(--text-primary)" text-anchor="middle">DEVICE A</text><text x="117" y="232" fill="var(--text-muted)" text-anchor="middle">192.168.1.10</text></g>
+                  <g><rect x="360" y="134" width="100" height="120" rx="4" fill="var(--p-void)" stroke="var(--accent-warning)"/><path d="M378 160h64M378 177h64M378 194h64" stroke="var(--accent-warning)" stroke-opacity=".55"/><circle cx="385" cy="220" r="4" fill="var(--accent-positive)"/><circle cx="400" cy="220" r="4" fill="var(--accent-critical)"/><text x="410" y="283" fill="var(--text-primary)" text-anchor="middle">SWITCH 01</text></g>
+                  <g><rect x="610" y="115" width="110" height="158" rx="4" fill="var(--p-void)" stroke="var(--accent-primary)"/><path d="M630 140h70v30h-70zM630 181h70v30h-70zM630 222h70v30h-70z" stroke="var(--accent-primary)" stroke-opacity=".55"/><circle cx="640" cy="155" r="3" fill="var(--accent-positive)"/><circle cx="640" cy="196" r="3" fill="var(--accent-positive)"/><circle cx="640" cy="237" r="3" fill="var(--accent-positive)"/><text x="665" y="300" fill="var(--text-primary)" text-anchor="middle">SERVER B</text></g>
+                </svg>
+              </div></div>
+              <div class="mission-objectives"><span class="panel-label">MISSION PROGRESS</span><div class="objective-row" id="objective-scan"><i></i><span>Run a network scan</span><strong>PENDING</strong></div><div class="objective-row" id="objective-fix"><i></i><span>Repair the faulty link</span><strong>PENDING</strong></div><div class="objective-row" id="objective-ping"><i></i><span>Verify with a ping</span><strong>PENDING</strong></div></div>
+            </div>
+            <aside class="lab-tools"><div class="panel-label">NETWORK TOOLS</div><p>Select a device to inspect it.</p><button type="button" data-action="inspect-device" data-device="Device A">Device A<span>192.168.1.10</span></button><button type="button" data-action="inspect-device" data-device="Switch 01">Switch 01<span>8 ports · Managed</span></button><button type="button" data-action="inspect-device" data-device="Server B">Server B<span>192.168.1.20</span></button><div class="device-inspector" id="device-inspector" aria-live="polite"><span>INSPECTOR</span><strong>No device selected</strong><p>Choose a device on the tools list.</p></div><button class="button button-primary cli-toggle" type="button" data-action="toggle-cli" id="cli-toggle">Open CLI<span>⌘</span></button></aside>
+            <aside class="cli-panel" id="cli-panel" aria-label="Command line interface" hidden><div class="simulation-header"><span>NETCOURSE CLI</span><button class="icon-button" type="button" data-action="toggle-cli" aria-label="Close CLI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="cli-output" id="cli-output" aria-live="polite"><p>NETCOURSE diagnostic shell v1.0</p><p>Type <strong>help</strong> to list commands.</p></div><div class="command-chips"><button type="button" data-action="run-command" data-command="scan">scan</button><button type="button" data-action="run-command" data-command="fix link">fix link</button><button type="button" data-action="run-command" data-command="ping">ping</button></div><form class="cli-form" id="cli-form"><label for="cli-input">netlab:~$</label><input id="cli-input" name="command" autocomplete="off" spellcheck="false" placeholder="Enter command"><button type="submit" aria-label="Run command">↵</button></form></aside>
+          </div>
+          <div class="lab-completion" id="lab-completion" hidden><div><span class="panel-label">CONNECTION RESTORED</span><strong>Mission complete. The path is clear.</strong></div><button class="button button-primary" type="button" data-action="start-check">Chapter check<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+        </div>
+      </section>
+
+      <!-- 07 / Chapter Check -->
+      <section class="view app-view check-view" data-view="check" aria-labelledby="check-question" hidden>
+        <div class="view-container check-container">
+          <div class="check-top"><button class="back-button" type="button" data-action="exit-check"><span>←</span>Exit check</button><span>CHAPTER CHECK</span></div>
+          <div class="assessment-progress"><div><span id="question-counter">QUESTION 1 OF 3</span><strong id="assessment-percent">33%</strong></div><div class="assessment-track"><span id="assessment-progress-bar" style="width:33.33%"></span></div></div>
+          <div class="question-card" id="question-card"><p class="eyebrow">KNOWLEDGE CHECK</p><h1 id="check-question" tabindex="-1">Why do networks exist?</h1><p class="question-instruction">Choose one answer, then submit your attempt.</p><div class="answer-list" id="answer-list"></div><div class="answer-feedback" id="answer-feedback" aria-live="polite"></div><div class="question-actions"><button class="button button-secondary" type="button" data-action="submit-answer" id="submit-answer" disabled>Submit answer</button><button class="button button-primary" type="button" data-action="next-question" id="next-question" disabled>Next question</button></div></div>
+        </div>
+      </section>
+
+      <!-- 08 / Summary -->
+      <section class="view app-view summary-view" data-view="summary" aria-labelledby="summary-title" hidden>
+        <div class="view-container summary-container">
+          <div class="achievement" id="achievement"><div class="achievement-badge"><svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="m50 5 39 22v45L50 95 11 72V27L50 5Z" stroke="currentColor" stroke-width="2"/><path d="m50 20 26 15v30L50 80 24 65V35l26-15Z" stroke="currentColor" stroke-opacity=".4"/><path d="m34 50 11 11 23-25" stroke="currentColor" stroke-width="5"/></svg><i></i><i></i><i></i></div><p class="eyebrow" id="summary-eyebrow">CHAPTER COMPLETE</p><h1 id="summary-title" tabindex="-1">Connection established.</h1><p id="summary-description">You can now explain how a message moves from one device to another.</p></div>
+          <div class="result-grid"><section class="result-panel"><span class="panel-label">ASSESSMENT RESULT</span><div class="result-value"><strong id="assessment-result">3/3</strong><span id="assessment-result-label">EXCELLENT</span></div><div class="result-track"><span id="assessment-result-bar" style="width:100%"></span></div><p id="assessment-result-copy">All three concepts are connected.</p></section><section class="result-panel"><span class="panel-label">PRACTICAL MISSION</span><div class="result-value"><strong id="mission-result">COMPLETE</strong><span class="success-text">VERIFIED</span></div><div class="result-track mission"><span style="width:100%"></span></div><p>Fault diagnosed · Link repaired · Ping successful</p></section></div>
+          <section class="skills-earned"><div class="section-heading"><h2>Skills acquired</h2><span>CHAPTER 01</span></div><div class="skill-chips"><span>Network purpose</span><span>Senders &amp; receivers</span><span>Communication paths</span><span>Basic diagnostics</span></div></section>
+          <section class="review-panel" id="review-panel" hidden><span class="panel-label">REVIEW RECOMMENDED</span><h2>Reconnect these concepts</h2><div id="review-topics"></div></section>
+          <div class="summary-actions"><button class="button button-secondary" type="button" data-action="go-map">Return to course map</button><button class="button button-primary" type="button" data-action="continue-chapter-2" id="continue-chapter-2">Continue to Chapter 2<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><button class="button button-primary" type="button" data-action="retake-check" id="retake-check" hidden>Retake chapter check</button></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
